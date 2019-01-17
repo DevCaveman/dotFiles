@@ -1,0 +1,4 @@
+#!/bin/bash
+#
+echo "Reiniciando i3wm..."
+i3-msg restart

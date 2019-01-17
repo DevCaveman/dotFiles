@@ -1,0 +1,17 @@
+#!/bin/bash
+#
+
+# Capturando o layout do teclado | US Inglês, BR Portugês
+teclado="$(setxkbmap -query | grep layout | awk '{print $2}')"
+
+if [ $teclado == "us" ]; then
+    echo "Carregando layout US.."
+    cat $HOME/.scripts/maps/US-map > $HOME/.Xmodmap
+    xmodmap $HOME/.Xmodmap
+elif [ $teclado == "br" ]; then
+    echo "Carregando layout BR.."
+    cat $HOME/.scripts/maps/BR-map > $HOME/.Xmodmap
+    xmodmap $HOME/.Xmodmap
+else
+  echo "ERROR - $teclado layout not found."
+fi

@@ -1,0 +1,17 @@
+!! US AltGr - Deadkeys
+!! mod keys - 64, 133, mod1, mod4
+!clear mod1
+!clear mod4
+clear lock
+keycode 9 = Caps_Lock NoSymbol Caps_Lock NoSymbol Caps_Lock
+keycode 49 = dead_tilde dead_grave quotedbl apostrophe asciitilde grave notsign notsign
+keycode 54 = c C c C ccedilla Ccedilla c C ccedilla Ccedilla
+keycode 59 = comma less comma less copyright cent copyright cent comma less copyright cent
+keycode 64 = Super_L NoSymbol Super_L NoSymbol Super_L
+keycode 66 = Escape NoSymbol Escape NoSymbol Escape
+!keycode 133 = Alt_L Meta_L Alt_L Meta_L Alt_L Meta_L
+keycode 135 = Super_L Menu Super_L Menu Super_L Menu
+!add mod1 = Alt_L
+!add mod1 = Meta_L
+!add mod4 = Super_L
+!add mod4 = Hyper_L

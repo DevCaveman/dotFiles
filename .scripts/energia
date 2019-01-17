@@ -1,0 +1,175 @@
+#!/bin/bash
+#
+# Author: ThiagoNod - Date: 22/11/2017
+# Versão 0.1
+#
+# Este script usa: 
+# --[x86_energy_perf_policy] de linux_tools.
+# --[getopt].
+#
+# Funções
+erro () {
+    case "$1" in
+        0)
+            echo ''
+            echo 'ERRO 0 - Nenhum parâmetro encontrado.' >&2
+            echo 'Para obter ajuda, use: energia --help'
+            echo ''
+            exit 1
+        ;;
+        1)
+            echo ''
+            echo 'ERRO 1 - Programa encerrado. Necessário permissões de root.' >&2
+            echo ''
+            exit 1
+        ;;
+        127)
+            echo ''
+            echo 'ERRO 127 - Comando inválido.' >&2
+            echo 'Para obter ajuda, use: energia --help'
+            echo ''
+            exit 1
+        ;;
+        *)
+            echo 'ERRO interno - Saindo...' >&2
+            exit 1
+        ;;
+    esac
+}
+
+get_status () {
+    echo 'Exibir modo de energia atual...'
+    x86_energy_perf_policy #
+    if [ ! $? -ne 0 ]; then #verificar se o ultimo comando foi bem sucedido.
+        echo ''
+        echo '(EPB 4)=Balance-Performance mode | (EPB 8)=Power-save mode'
+        echo ''
+    else
+        erro 1
+    fi
+}
+
+set_mode () {
+    case "$1" in
+        1)
+            echo 'Ativar o modo de performance...'
+            x86_energy_perf_policy balance-performance
+            if [ ! $? -ne 0 ]; then #verificar se o ultimo comando foi bem sucedido.
+                echo ''
+                echo 'Modo PERFORMANCE ativado com sucesso.'
+                echo ''
+            else
+                erro 1
+            fi
+        ;;
+        2)
+            echo 'Ativar modo de economia de energia...'
+            x86_energy_perf_policy balance-power
+            if [ ! $? -ne 0 ]; then #verificar se o ultimo comando foi bem sucedido.
+                echo ''
+                echo 'Modo ECONOMIA DE ENERGIA ativado com sucesso.'
+                echo ''
+            else
+                erro 1
+            fi
+
+        ;;
+        *)
+            erro
+        ;;
+    esac
+}
+
+get_help () {
+    echo ''
+    echo 'Configurações de energia, modo de usar:'
+    echo ''
+    echo 'Comando:' 
+    echo ''
+    echo '      energia [opção] [parâmetro]'
+    echo ''
+    echo 'Opções:'
+    echo '' 
+    echo '  -h ou --help   => Menu de ajuda.'
+    echo '  -s ou --status => Mostra qual o modo sendo usado no momento.'
+    echo '  -m ou --mode   => Seta o modo de energia a ser usado por parâmetro.'
+    echo ''
+    echo ''
+    echo 'Parâmetros:'
+    echo ''
+    echo '  per  ou  performance  => Modo performance.'
+    echo '  sav  ou  savepower    => Modo economia de energia.'
+    echo ''
+    echo ''
+    echo 'Exemplos:'
+    echo ''
+    echo '  Para saber qual modo o CPU está usando atualmente, use:'
+    echo ''
+    echo '      energia -s   ou   energia --status'
+    echo ''
+    echo '  Para usar o modo performance, use:'
+    echo ''
+    echo '      energia -m per  ou  energia --mode=performance'
+    echo ''
+    echo '  Para usar o modo de economia de energia, use:'
+    echo ''
+    echo '      energia -m sav  ou  energia --mode=savepower'
+    echo ''
+}
+
+# Iniciando o programa.
+TEMP=$(getopt -o 'hsm:' --long 'help,status,mode:' -n 'erro' -- "$@")
+if [ $? -ne 0 ]; then #verificar argumentos passados como parâmetro. 0 = erro
+    erro 127
+fi
+
+eval set -- "$TEMP"
+unset TEMP
+
+# impedir um comando sem argumento, em branco.
+if [ $1 == "--" ]; then # "--" = vazio
+    erro 0
+fi
+
+# identificando quais parâmetros foram passados.
+while true; do
+    case "$1" in
+        '-h'|'--help')
+            get_help
+            shift
+            continue
+        ;;
+        '-s'|'--status')
+            get_status
+            shift
+            continue
+        ;;
+        '-m'|'--mode')
+            case "$2" in
+                'per'|'performance')
+                    set_mode 1
+                ;;
+                'sav'|'savepower')
+                    set_mode 2
+                ;;
+                *)
+                    erro 127
+                ;;
+            esac
+            shift 2
+            continue
+        ;;
+        '--') # Parar o while quando $1 estiver vazio "--".
+            shift 
+            break
+        ;;
+        *) # Invoca um erro caso algum parâmetro maluco for passado.
+            erro
+        ;;
+    esac
+done
+
+# Exibe os parâmetros desconhecidos.
+for arg in "$@"; do
+    echo "Não sei o que é '$@'"
+done

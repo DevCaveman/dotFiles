@@ -1,0 +1,17 @@
+!! pt_BR ABNT2
+!! mod keys - 64, 133, mod1, mod4
+!clear mod1
+!clear mod4
+clear lock
+keycode 9 = Caps_Lock NoSymbol Caps_Lock NoSymbol Caps_Lock
+keycode 47 = semicolon colon semicolon colon dead_abovedot dead_belowdot dead_abovedot dead_belowdot 
+keycode 49 = apostrophe quotedbl apostrophe quotedbl notsign notsign notsign
+keycode 61 = ccedilla Ccedilla ccedilla Ccedilla dead_acute dead_doubleacute dead_acute dead_doubleacute ccedilla Ccedilla dead_acute dead_doubleacute
+keycode 64 = Super_L NoSymbol Super_L NoSymbol Super_L
+keycode 66 = Escape NoSymbol Escape NoSymbol Escape
+!keycode 133 = Alt_L Meta_L Alt_L Meta_L Alt_L Meta_L
+keycode 135 = Super_L Menu Super_L Menu Super_L Menu
+!add mod1 = Alt_L
+!add mod1 = Meta_L
+!add mod4 = Super_L
+!add mod4 = Hyper_L

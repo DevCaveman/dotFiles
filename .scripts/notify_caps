@@ -1,0 +1,9 @@
+caps_state="$(xset q | grep 'Caps' | awk '{ print $4 }')"
+
+if [ $caps_state == "on" ]; then
+    notify-send "Capslock ON"
+elif [ $caps_state == "off" ]; then
+    notify-send "Capslock OFF"
+else
+    notify-send "ERRO caps_state"
+fi

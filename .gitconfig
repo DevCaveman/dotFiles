@@ -1,0 +1,12 @@
+[user]
+	name = Thiago G.Martins
+	email = devthiago.py@gmail.com
+[credential]
+	helper = store
+[alias]
+    push-up = !git checkout master && git pull && git checkout dev && git rebase master && git checkout master && git merge dev && git push
+    gits = !git status -uno
+[core]
+	editor = nvim
+[color]
+    ui = true

@@ -1,0 +1,4 @@
+#!/bin/bash
+#
+echo "Recarregando arquivos de configuração do i3..."
+i3-msg reload

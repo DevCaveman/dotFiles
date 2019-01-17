@@ -1,0 +1,37 @@
+conky.config = {
+	alignment = 'bottom_left',
+	background = true,
+	cpu_avg_samples = 2,
+	double_buffer = true,
+	font = 'Bitstream Vera Sans:size=8',
+        default_color = 'E90803',
+        color2 = '222E5A',
+	gap_x = 25,
+	gap_y = 23,
+	minimum_width = 200,
+	no_buffers = true,
+	own_window = true,
+	own_window_type = 'override',
+	own_window_transparent = true,
+	update_interval = 2.0,
+	use_xft = true,
+}
+conky.text = [[
+${color2}Open terminal - ${color}Mod+Enter
+${color2}Open file manager - ${color}Mod+r / t
+${color2}Open google chrome - ${color}Mod+c
+${color2}Search prograns - ${color}Mod+d
+${color2}Jump to workspaces 1~8 - ${color}Mod+1~8
+${color2}Move to workspaces 1~8 - ${color}Mod+Ctrl+1~8
+${color2}Scroll workspaces - ${color}Mod+Ctrl+j~k / arrowkeys
+${color2}Change keyboard layout - ${color}Mod+Ctrl+space
+${color2}Close active window - ${color}Mod+Shift+q
+${color2}Toggle floating - ${color}Mod+Shift+Space
+${color2}Toggle split (H~V) - ${color}Mod+q
+${color2}Toggle stick - ${color}Mod+s
+${color2}Configurations - ${color}Mod+z
+${color2}Exit - ${color}Mod+0
+
+${color2}Help - ${color}Mod+F1
+default Mod=<Super>
+]]

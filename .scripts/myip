@@ -1,0 +1,5 @@
+#!/bin/bash
+#
+IP=$(ip addr show | grep -v "127.0.0.1" | grep "inet " | sed 's/^ *//g' | cut -d " " -f2)
+GW=$(ip route show | grep default | grep via | head -1 | cut -d " " -f3)
+echo "Ip address $IP, default gateway $GW"
